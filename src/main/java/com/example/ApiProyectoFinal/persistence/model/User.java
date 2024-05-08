@@ -54,6 +54,13 @@ public class User implements UserDetails, Serializable {
     @ManyToMany(mappedBy = "followers")
     private Set<User> following = new HashSet<>();
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.createDate = LocalDateTime.now();
+        // Los conjuntos ya están inicializados en la declaración del campo
+    }
+
     // UserDetails required methods implementation, without authorities
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
