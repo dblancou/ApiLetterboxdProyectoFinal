@@ -5,6 +5,7 @@ import com.example.ApiProyectoFinal.persistence.model.User;
 import com.example.ApiProyectoFinal.persistence.repository.UserRepositoryI;
 import com.example.ApiProyectoFinal.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,11 +47,45 @@ public class UserServiceImpl implements UserServiceI {
         return users.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
+    /*
     @Override
     public UserDTO findByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return convertToDTO(user);
+    }
+
+     */
+
+    private User findUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    @Override
+    public UserDTO findUserByUsernameDTO(String username) {
+        User user = findUserByUsername(username);
+
+        UserDTO userDto = new UserDTO();
+        userDto.setUserId(user.getUserId());
+        userDto.setUsername(user.getUsername());
+        userDto.setCreateDate(user.getCreateDate());
+        return userDto;
+    }
+
+    @Override
+    public UserDTO updateUserDescription(String username, UserDTO userUpdateDTO) {
+        return null;
+    }
+
+    @Override
+    public List<UserDTO> getFollowers(String username) {
+        return null;
+    }
+
+    @Override
+    public List<UserDTO> getFollows(String username) {
+        return null;
     }
 
     private UserDTO convertToDTO(User user) {
