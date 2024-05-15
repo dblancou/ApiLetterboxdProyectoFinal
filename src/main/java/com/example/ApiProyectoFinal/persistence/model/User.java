@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -22,11 +22,13 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
+    @EqualsAndHashCode.Include
     private Long userId;
 
     @Column(name = "username", unique = true, nullable = false)
@@ -42,29 +44,29 @@ public class User implements UserDetails, Serializable {
     @Column(name = "create_date", nullable = false, updatable = false)
     private LocalDateTime createDate;
 
-    // Following and followers feature
     @ManyToMany
     @JoinTable(
             name = "user_followers",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "follower_id")
     )
+    @EqualsAndHashCode.Exclude
     private Set<User> followers = new HashSet<>();
 
     @ManyToMany(mappedBy = "followers")
+    @EqualsAndHashCode.Exclude
     private Set<User> following = new HashSet<>();
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.createDate = LocalDateTime.now();
-        // Los conjuntos ya están inicializados en la declaración del campo
     }
 
-    // UserDetails required methods implementation, without authorities
+    // Implementación de métodos requeridos por UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new HashSet<>(); // Return an empty set of authorities
+        return new HashSet<>();
     }
 
     @Override
@@ -85,5 +87,16 @@ public class User implements UserDetails, Serializable {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    // Método toString personalizado
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='[PROTECTED]'" +
+                ", createDate=" + createDate +
+                '}';
     }
 }

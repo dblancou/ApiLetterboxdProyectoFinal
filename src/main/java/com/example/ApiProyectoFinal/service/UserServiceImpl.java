@@ -7,6 +7,7 @@ import com.example.ApiProyectoFinal.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,11 +58,6 @@ public class UserServiceImpl implements UserServiceI {
 
      */
 
-    private User findUserByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }
-
     @Override
     public UserDTO findUserByUsernameDTO(String username) {
         User user = findUserByUsername(username);
@@ -73,18 +69,73 @@ public class UserServiceImpl implements UserServiceI {
         return userDto;
     }
 
+    @Transactional
+    @Override
+    public void followUser(String username, Long followUserId) {
+        User currentUser = findUserByUsername(username);
+        User followUser = userRepository.findById(followUserId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!currentUser.getFollowing().contains(followUser)) {
+            currentUser.getFollowing().add(followUser);
+            followUser.getFollowers().add(currentUser);
+            userRepository.save(currentUser);
+            userRepository.save(followUser);
+            System.out.println("User " + currentUser.getUsername() + " is now following " + followUser.getUsername());
+        } else {
+            System.out.println("User " + currentUser.getUsername() + " already follows " + followUser.getUsername());
+        }
+
+        System.out.println("Current User Following: " + currentUser.getFollowing());
+        System.out.println("Follow User Followers: " + followUser.getFollowers());
+    }
+
+    @Transactional
+    @Override
+    public void unfollowUser(String username, Long unfollowUserId) {
+        User currentUser = findUserByUsername(username);
+        User unfollowUser = userRepository.findById(unfollowUserId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (currentUser.getFollowing().contains(unfollowUser)) {
+            currentUser.getFollowing().remove(unfollowUser);
+            unfollowUser.getFollowers().remove(currentUser);
+            userRepository.save(currentUser);
+            userRepository.save(unfollowUser);
+            System.out.println("User " + currentUser.getUsername() + " has unfollowed " + unfollowUser.getUsername());
+        } else {
+            System.out.println("User " + currentUser.getUsername() + " does not follow " + unfollowUser.getUsername());
+        }
+
+        System.out.println("Current User Following: " + currentUser.getFollowing());
+        System.out.println("Unfollow User Followers: " + unfollowUser.getFollowers());
+    }
+
+    private User findUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserDTO> getFollowers(String username) {
+        User user = findUserByUsername(username);
+        return user.getFollowers().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserDTO> getFollows(String username) {
+        User user = findUserByUsername(username);
+        return user.getFollowing().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public UserDTO updateUserDescription(String username, UserDTO userUpdateDTO) {
-        return null;
-    }
-
-    @Override
-    public List<UserDTO> getFollowers(String username) {
-        return null;
-    }
-
-    @Override
-    public List<UserDTO> getFollows(String username) {
         return null;
     }
 

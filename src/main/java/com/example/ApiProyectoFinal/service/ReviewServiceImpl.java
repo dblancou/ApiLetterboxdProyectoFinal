@@ -1,8 +1,12 @@
 package com.example.ApiProyectoFinal.service;
 
 import com.example.ApiProyectoFinal.dto.ReviewDTO;
+import com.example.ApiProyectoFinal.persistence.model.Film;
 import com.example.ApiProyectoFinal.persistence.model.Review;
+import com.example.ApiProyectoFinal.persistence.model.User;
+import com.example.ApiProyectoFinal.persistence.repository.FilmRepositoryI;
 import com.example.ApiProyectoFinal.persistence.repository.ReviewRepositoryI;
+import com.example.ApiProyectoFinal.persistence.repository.UserRepositoryI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +17,11 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewServiceI {
     @Autowired
     private ReviewRepositoryI reviewRepository;
+
+    @Autowired
+    private UserRepositoryI userRepository; // Añadir inyección de UserRepository
+    @Autowired
+    private FilmRepositoryI filmRepository; // Añadir inyección de FilmRepository
 
     @Override
     public ReviewDTO createReview(ReviewDTO reviewDTO) {
@@ -42,12 +51,16 @@ public class ReviewServiceImpl implements ReviewServiceI {
 
     @Override
     public List<ReviewDTO> getReviewsByFilm(Long filmId) {
-        return null;
+        return reviewRepository.findByFilmFilmId(filmId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<ReviewDTO> getReviewsByUser(Long userId) {
-        return null;
+        return reviewRepository.findByUserUserId(userId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -57,24 +70,12 @@ public class ReviewServiceImpl implements ReviewServiceI {
                 .collect(Collectors.toList());
     }
 
+
     @Override
     public List<ReviewDTO> getReviewsByFilmId(Long filmId) {
         return reviewRepository.findByFilmFilmId(filmId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-    }
-
-
-    private ReviewDTO convertToDTO(Review review) {
-        return new ReviewDTO(review.getReviewId(), review.getUser().getUserId(),
-                review.getFilm().getFilmId(), review.getContent(),
-                review.getRating(), review.getReviewDate());
-    }
-
-    private Review convertToEntity(ReviewDTO reviewDTO) {
-        Review review = new Review();
-        // Fields would be set similarly to convertToDTO's logic
-        return review;
     }
 
     @Override
@@ -84,4 +85,30 @@ public class ReviewServiceImpl implements ReviewServiceI {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+
+    private ReviewDTO convertToDTO(Review review) {
+        return new ReviewDTO(review.getReviewId(), review.getUser().getUserId(),
+                review.getFilm().getFilmId(), review.getContent(),
+                review.getRating(), review.getReviewDate());
+    }
+
+    private Review convertToEntity(ReviewDTO reviewDTO) {
+        Review review = new Review();
+        review.setReviewId(reviewDTO.getReviewId());
+
+        // Asegúrate de obtener y asignar correctamente las entidades User y Film
+        User user = userRepository.findById(reviewDTO.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        review.setUser(user);
+
+        Film film = filmRepository.findById(reviewDTO.getFilmId())
+                .orElseThrow(() -> new RuntimeException("Film not found"));
+        review.setFilm(film);
+
+        review.setContent(reviewDTO.getContent());
+        review.setRating(reviewDTO.getRating());
+        review.setReviewDate(reviewDTO.getReviewDate());
+        return review;
+    }
 }
+

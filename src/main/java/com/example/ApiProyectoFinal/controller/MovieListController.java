@@ -32,13 +32,20 @@ public class MovieListController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MovieListDTO> updateMovieList(@PathVariable Long id, @RequestBody MovieListDTO movieListDTO) {
-        movieListDTO.setListId(id);
+        movieListDTO.setListId(id);  // Asegurarse de que el ID de la lista está configurado correctamente
         return ResponseEntity.ok(movieListService.updateMovieList(movieListDTO));
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovieList(@PathVariable Long id) {
         movieListService.deleteMovieList(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<MovieListDTO>> getMovieListsByUser(@PathVariable Long userId) {
+        List<MovieListDTO> movieLists = movieListService.getMovieListsByUser(userId);
+        return ResponseEntity.ok(movieLists);
     }
 }

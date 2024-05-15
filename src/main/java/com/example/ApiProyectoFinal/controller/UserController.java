@@ -93,6 +93,18 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/{id}/follow")
+    public ResponseEntity<Void> followUser(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+        userService.followUser(userDetails.getUsername(), id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}/unfollow")
+    public ResponseEntity<Void> unfollowUser(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long id) {
+        userService.unfollowUser(userDetails.getUsername(), id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/followers/{username}")
     @Operation(summary = "Get a user's followers")
     public ResponseEntity<List<UserDTO>> getFollowers(@PathVariable String username) {
@@ -103,8 +115,8 @@ public class UserController {
     @GetMapping("/follows/{username}")
     @Operation(summary = "Get a user's followeds")
     public ResponseEntity<List<UserDTO>> getFollows(@PathVariable String username) {
-        List<UserDTO> followers = userService.getFollows(username);
-        return ResponseEntity.ok(followers);
+        List<UserDTO> follows = userService.getFollows(username);
+        return ResponseEntity.ok(follows);
     }
 
 }

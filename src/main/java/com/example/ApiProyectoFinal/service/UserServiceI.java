@@ -16,6 +16,10 @@ public interface UserServiceI {
 
     UserDTO updateUserDescription(String username, UserDTO userUpdateDTO);
 
+    void followUser(String username, Long followUserId);
+
+    void unfollowUser(String username, Long unfollowUserId);
+
     List<UserDTO> getFollowers(String username);
 
     List<UserDTO> getFollows(String username);

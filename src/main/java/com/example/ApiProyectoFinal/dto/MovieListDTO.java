@@ -17,6 +17,7 @@ public class MovieListDTO implements Serializable {
     private Long listId;
     private Long userId;
     private String name;
+    private String description;
     private LocalDateTime createdAt;
-    private List<FilmDTO> films; // Lista de películas en la lista
+    private List<FilmDTO> films;
 }
