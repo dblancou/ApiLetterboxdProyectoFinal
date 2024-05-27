@@ -18,11 +18,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-/**
- * Filtro para la autenticación JWT.
- *
- * @author Daniel Blanco
- */
 @Component
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
@@ -32,18 +27,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    /**
-     * Método para realizar la autenticación basada en JWT.
-     * Extrae el token del encabezado de autorización, valida el token y establece la autenticación en el
-     * contexto de seguridad.
-     *
-     * @param request La solicitud HTTP.
-     * @param response La respuesta HTTP.
-     * @param filterChain El filtro de cadena.
-     * @throws ServletException Si ocurre una excepción de servlet.
-     * @throws IOException Si ocurre una excepción de entrada/salida.
-     */
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -52,7 +35,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         final String username;
 
         if (token == null) {
-
             filterChain.doFilter(request, response);
             return;
         }
@@ -60,8 +42,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         username = JWTMngm.getUsernameFromToken(token);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-            UserDetails userDetails =userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if (JWTMngm.isTokenValid(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -77,21 +58,11 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    /**
-     * Método para extraer el token de la solicitud HTTP.
-     *
-     * @param request La solicitud HTTP.
-     * @return El token JWT.
-     */
-
-    private String getTokenFromRequest(HttpServletRequest request){
-
+    private String getTokenFromRequest(HttpServletRequest request) {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-
         if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
             return authHeader.substring(7);
         }
-
         return null;
     }
 }

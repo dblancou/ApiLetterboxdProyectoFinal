@@ -47,8 +47,6 @@ public class Film implements Serializable {
     @Column(name = "poster_url")
     private String posterUrl;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "film_id")
-    private List<Image> images;
+
 
 }

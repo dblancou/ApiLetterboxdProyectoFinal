@@ -15,12 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- * Configuración de la aplicación.
- *
- * @autor Daniel Blanco
- */
-
 @Configuration
 @EnableTransactionManagement
 public class ApplicationConfig {
@@ -28,24 +22,10 @@ public class ApplicationConfig {
     @Autowired
     private UserRepositoryI userRepo;
 
-    /**
-     * Bean para obtener el gestor de autenticación.
-     *
-     * @param config Configuración de autenticación.
-     * @return Gestor de autenticación.
-     * @throws Exception Si hay un error al obtener el gestor de autenticación.
-     */
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-
-    /**
-     * Bean para proporcionar un proveedor de autenticación personalizado.
-     *
-     * @return Proveedor de autenticación.
-     */
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -55,23 +35,11 @@ public class ApplicationConfig {
         return authenticationProvider;
     }
 
-    /**
-     * Bean para proporcionar un servicio de detalles de usuario personalizado.
-     *
-     * @return Servicio de detalles de usuario.
-     */
-
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> (UserDetails) userRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-
-    /**
-     * Bean para proporcionar un codificador de contraseñas.
-     *
-     * @return Codificador de contraseñas.
-     */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
