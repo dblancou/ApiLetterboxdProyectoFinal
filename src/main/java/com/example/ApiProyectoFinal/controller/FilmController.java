@@ -41,4 +41,14 @@ public class FilmController {
         filmService.deleteFilm(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/latest")
+    public List<FilmDTO> getLatestFilms(@RequestParam(defaultValue = "5") int limit) {
+        return filmService.getLatestFilms(limit);
+    }
+
+    @GetMapping("/topRated")
+    public List<FilmDTO> getTopRatedFilms(@RequestParam(defaultValue = "8") int limit) {
+        return filmService.getTopRatedFilms(limit);
+    }
 }

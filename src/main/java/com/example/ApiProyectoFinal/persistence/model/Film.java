@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -46,6 +47,9 @@ public class Film implements Serializable {
 
     @Column(name = "poster_url")
     private String posterUrl;
+
+    @Column(name = "created_at") // Asegúrate de tener este campo
+    private LocalDateTime createdAt;
 
 
 
