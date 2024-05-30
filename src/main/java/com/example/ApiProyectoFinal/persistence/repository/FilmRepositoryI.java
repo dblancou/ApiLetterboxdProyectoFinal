@@ -4,7 +4,6 @@ import com.example.ApiProyectoFinal.persistence.model.Film;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -31,12 +30,10 @@ public interface FilmRepositoryI extends JpaRepository<Film, Long> {
     // Recupera una lista de películas ordenadas por su calificación IMDb de forma descendente
     List<Film> findAllByOrderByImdbRatingDesc();
 
-    // Método corregido para obtener las últimas películas
-    List<Film> findTop5ByOrderByCreatedAtDesc();
-    List<Film> findByOrderByCreatedAtDesc(Pageable pageable);
+    // Método para obtener las últimas películas ordenadas por filmId
+    @Query("SELECT f FROM Film f ORDER BY f.filmId DESC")
+    List<Film> findLatestFilms(Pageable pageable);
 
-
-    // Método corregido para obtener las mejores películas
+    // Método para obtener las mejores películas
     List<Film> findTop8ByOrderByImdbRatingDesc();
-
 }

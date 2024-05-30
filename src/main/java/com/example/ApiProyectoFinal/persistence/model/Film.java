@@ -48,8 +48,6 @@ public class Film implements Serializable {
     @Column(name = "poster_url")
     private String posterUrl;
 
-    @Column(name = "created_at") // Asegúrate de tener este campo
-    private LocalDateTime createdAt;
 
 
 

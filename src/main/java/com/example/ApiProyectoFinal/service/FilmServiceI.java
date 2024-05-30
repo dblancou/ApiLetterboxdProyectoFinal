@@ -12,6 +12,9 @@ public interface FilmServiceI {
     List<FilmDTO> getAllFilms();
     List<FilmDTO> findByGenre(String genreName);
     List<FilmDTO> findByDirector(String director);
-    List<FilmDTO> getLatestFilms(int limit); // Nuevo método
+    //List<FilmDTO> getLatestFilms(int limit); // Nuevo método
+
+    List<FilmDTO> getLatestFilms(int limit, String sortOrder);
+
     List<FilmDTO> getTopRatedFilms(int limit); // Nuevo método
 }

@@ -4,8 +4,8 @@ import com.example.ApiProyectoFinal.dto.FilmDTO;
 import com.example.ApiProyectoFinal.persistence.model.Film;
 import com.example.ApiProyectoFinal.persistence.model.Genre;
 import com.example.ApiProyectoFinal.persistence.repository.FilmRepositoryI;
-import com.example.ApiProyectoFinal.service.FilmServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,12 +60,12 @@ public class FilmServiceImpl implements FilmServiceI {
     }
 
     @Override
-    public List<FilmDTO> getLatestFilms(int limit) {
-        List<Film> films = filmRepository.findTop5ByOrderByCreatedAtDesc();
+    public List<FilmDTO> getLatestFilms(int limit, String sortOrder) {
+        PageRequest pageRequest = PageRequest.of(0, limit);
+        List<Film> films = filmRepository.findLatestFilms(pageRequest);
         return films.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    
     @Override
     public List<FilmDTO> getTopRatedFilms(int limit) {
         List<Film> films = filmRepository.findTop8ByOrderByImdbRatingDesc();

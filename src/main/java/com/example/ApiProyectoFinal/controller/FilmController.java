@@ -43,8 +43,8 @@ public class FilmController {
     }
 
     @GetMapping("/latest")
-    public List<FilmDTO> getLatestFilms(@RequestParam(defaultValue = "5") int limit) {
-        return filmService.getLatestFilms(limit);
+    public List<FilmDTO> getLatestFilms(@RequestParam(defaultValue = "6") int limit, @RequestParam(defaultValue = "desc") String sortOrder) {
+        return filmService.getLatestFilms(limit, sortOrder);
     }
 
     @GetMapping("/topRated")
