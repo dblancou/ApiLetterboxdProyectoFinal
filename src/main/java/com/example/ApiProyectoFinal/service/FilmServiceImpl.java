@@ -48,8 +48,9 @@ public class FilmServiceImpl implements FilmServiceI {
     }
 
     @Override
-    public List<FilmDTO> findByGenre(String genreName) {
-        List<Film> films = filmRepository.findByGenreName(genreName);
+    public List<FilmDTO> findByGenre(String genreName, int limit) {
+        PageRequest pageRequest = PageRequest.of(0, limit);
+        List<Film> films = filmRepository.findByGenreName(genreName, pageRequest);
         return films.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
@@ -68,9 +69,19 @@ public class FilmServiceImpl implements FilmServiceI {
 
     @Override
     public List<FilmDTO> getTopRatedFilms(int limit) {
-        List<Film> films = filmRepository.findTop8ByOrderByImdbRatingDesc();
+        List<Film> films = filmRepository.findTop10ByOrderByImdbRatingDesc();
         return films.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
+
+    /*
+    @Override
+    public List<FilmDTO> getTopRatedFilms(int limit) {
+        PageRequest pageRequest = PageRequest.of(0, limit);
+        List<Film> films = filmRepository.findTopRatedFilms(pageRequest);
+        return films.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+     */
 
     private FilmDTO convertToDTO(Film film) {
         FilmDTO filmDTO = new FilmDTO();

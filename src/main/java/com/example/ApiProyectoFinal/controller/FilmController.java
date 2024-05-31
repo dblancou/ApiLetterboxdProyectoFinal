@@ -48,7 +48,12 @@ public class FilmController {
     }
 
     @GetMapping("/topRated")
-    public List<FilmDTO> getTopRatedFilms(@RequestParam(defaultValue = "8") int limit) {
+    public List<FilmDTO> getTopRatedFilms(@RequestParam(defaultValue = "10") int limit) {
         return filmService.getTopRatedFilms(limit);
+    }
+
+    @GetMapping("/genre")
+    public List<FilmDTO> getFilmsByGenre(@RequestParam String genreName, @RequestParam(defaultValue = "8") int limit) {
+        return filmService.findByGenre(genreName, limit);
     }
 }

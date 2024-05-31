@@ -21,8 +21,8 @@ public interface FilmRepositoryI extends JpaRepository<Film, Long> {
     // Busca películas que tengan una calificación IMDb superior a un cierto umbral
     List<Film> findByImdbRatingGreaterThan(double rating);
 
-    // Busca películas por género - actualizado para la nueva estructura
-    List<Film> findByGenreName(String genreName); // Asumiendo que la clase Genre tiene un atributo 'name'
+    // Método para buscar películas por género con límite
+    List<Film> findByGenreName(String genreName, Pageable pageable);
 
     // Busca películas que contengan una palabra clave en el título
     List<Film> findByTitleContaining(String keyword);
@@ -35,5 +35,7 @@ public interface FilmRepositoryI extends JpaRepository<Film, Long> {
     List<Film> findLatestFilms(Pageable pageable);
 
     // Método para obtener las mejores películas
-    List<Film> findTop8ByOrderByImdbRatingDesc();
+    List<Film> findTop10ByOrderByImdbRatingDesc();
+
+
 }

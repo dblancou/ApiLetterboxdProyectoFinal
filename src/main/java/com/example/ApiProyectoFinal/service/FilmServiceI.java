@@ -10,7 +10,7 @@ public interface FilmServiceI {
     void deleteFilm(Long filmId);
     FilmDTO getFilmById(Long filmId);
     List<FilmDTO> getAllFilms();
-    List<FilmDTO> findByGenre(String genreName);
+    List<FilmDTO> findByGenre(String genreName, int limit); // Modificado
     List<FilmDTO> findByDirector(String director);
     //List<FilmDTO> getLatestFilms(int limit); // Nuevo método
 
