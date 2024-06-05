@@ -73,15 +73,22 @@ public class FilmServiceImpl implements FilmServiceI {
         return films.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    /*
     @Override
-    public List<FilmDTO> getTopRatedFilms(int limit) {
-        PageRequest pageRequest = PageRequest.of(0, limit);
-        List<Film> films = filmRepository.findTopRatedFilms(pageRequest);
-        return films.stream().map(this::convertToDTO).collect(Collectors.toList());
+    public List<FilmDTO> searchFilmsByTitle(String title) {
+        List<Film> films = filmRepository.findByTitleContainingIgnoreCase(title);
+        return films.stream()
+                .map(film -> new FilmDTO(
+                        film.getFilmId(),
+                        film.getTitle(),
+                        film.getDirector(),
+                        film.getYear(),
+                        film.getGenre().getName(),
+                        film.getDescription(),
+                        film.getImdbRating(),
+                        film.getPosterUrl()
+                ))
+                .collect(Collectors.toList());
     }
-
-     */
 
     private FilmDTO convertToDTO(Film film) {
         FilmDTO filmDTO = new FilmDTO();

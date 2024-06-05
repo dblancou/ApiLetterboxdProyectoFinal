@@ -26,6 +26,7 @@ public interface FilmRepositoryI extends JpaRepository<Film, Long> {
 
     // Busca películas que contengan una palabra clave en el título
     List<Film> findByTitleContaining(String keyword);
+    List<Film> findByTitleContainingIgnoreCase(String title);
 
     // Recupera una lista de películas ordenadas por su calificación IMDb de forma descendente
     List<Film> findAllByOrderByImdbRatingDesc();
@@ -36,6 +37,8 @@ public interface FilmRepositoryI extends JpaRepository<Film, Long> {
 
     // Método para obtener las mejores películas
     List<Film> findTop10ByOrderByImdbRatingDesc();
+
+
 
 
 }

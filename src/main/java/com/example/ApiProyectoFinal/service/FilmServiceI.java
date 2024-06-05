@@ -17,4 +17,6 @@ public interface FilmServiceI {
     List<FilmDTO> getLatestFilms(int limit, String sortOrder);
 
     List<FilmDTO> getTopRatedFilms(int limit); // Nuevo método
+
+    List<FilmDTO> searchFilmsByTitle(String title);
 }

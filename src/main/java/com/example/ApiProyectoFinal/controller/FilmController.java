@@ -56,4 +56,9 @@ public class FilmController {
     public List<FilmDTO> getFilmsByGenre(@RequestParam String genreName, @RequestParam(defaultValue = "8") int limit) {
         return filmService.findByGenre(genreName, limit);
     }
+
+    @GetMapping("/search")
+    public List<FilmDTO> searchFilmsByTitle(@RequestParam String title) {
+        return filmService.searchFilmsByTitle(title);
+    }
 }
