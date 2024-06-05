@@ -86,13 +86,22 @@ public class MovieListServiceImpl implements MovieListServiceI {
     }
 
     private MovieListDTO convertToDTO(MovieList movieList) {
-        return new MovieListDTO(movieList.getId(), movieList.getUser().getUserId(),
-                movieList.getName(), movieList.getDescription(), movieList.getCreatedAt(),
+        return new MovieListDTO(movieList.getId(),
+                movieList.getUser().getUserId(),
+                movieList.getUser().getUsername(), // Obtener el nombre de usuario
+                movieList.getName(),
+                movieList.getDescription(),
+                movieList.getCreatedAt(),
                 movieList.getFilms().stream().map(film -> new FilmDTO(film.getFilmId(),
-                        film.getTitle(), film.getDirector(), film.getYear(),
-                        film.getGenre().getName(), film.getDescription(),
-                        film.getImdbRating(), film.getPosterUrl())).collect(Collectors.toList()));
+                        film.getTitle(),
+                        film.getDirector(),
+                        film.getYear(),
+                        film.getGenre().getName(),
+                        film.getDescription(),
+                        film.getImdbRating(),
+                        film.getPosterUrl())).collect(Collectors.toList()));
     }
+
 
     private MovieList convertToEntity(MovieListDTO movieListDTO) {
         MovieList movieList = new MovieList();

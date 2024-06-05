@@ -139,6 +139,16 @@ public class UserServiceImpl implements UserServiceI {
         return null;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public boolean isFollowing(String username, Long userId) {
+        User currentUser = findUserByUsername(username);
+        User targetUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return currentUser.getFollowing().contains(targetUser);
+    }
+
     private UserDTO convertToDTO(User user) {
         UserDTO dto = new UserDTO();
         dto.setUserId(user.getUserId());

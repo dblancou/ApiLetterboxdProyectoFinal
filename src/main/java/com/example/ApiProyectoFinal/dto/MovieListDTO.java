@@ -16,6 +16,7 @@ public class MovieListDTO implements Serializable {
 
     private Long listId;
     private Long userId;
+    private String userName; // Nuevo campo
     private String name;
     private String description;
     private LocalDateTime createdAt;

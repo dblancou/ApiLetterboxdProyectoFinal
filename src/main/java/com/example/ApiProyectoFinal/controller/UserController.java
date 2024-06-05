@@ -119,4 +119,10 @@ public class UserController {
         return ResponseEntity.ok(follows);
     }
 
+    @GetMapping("/{userId}/isFollowing")
+    public ResponseEntity<Boolean> isFollowing(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long userId) {
+        boolean isFollowing = userService.isFollowing(userDetails.getUsername(), userId);
+        return ResponseEntity.ok(isFollowing);
+    }
+
 }

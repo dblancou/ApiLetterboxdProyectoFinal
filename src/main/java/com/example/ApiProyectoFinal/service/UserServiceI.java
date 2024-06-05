@@ -1,6 +1,7 @@
 package com.example.ApiProyectoFinal.service;
 
 import com.example.ApiProyectoFinal.dto.UserDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,4 +24,7 @@ public interface UserServiceI {
     List<UserDTO> getFollowers(String username);
 
     List<UserDTO> getFollows(String username);
+
+    @Transactional(readOnly = true)
+    boolean isFollowing(String username, Long userId);
 }
