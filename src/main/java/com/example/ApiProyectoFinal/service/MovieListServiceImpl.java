@@ -4,6 +4,7 @@ import com.example.ApiProyectoFinal.dto.FilmDTO;
 import com.example.ApiProyectoFinal.dto.MovieListDTO;
 import com.example.ApiProyectoFinal.persistence.model.Film;
 import com.example.ApiProyectoFinal.persistence.model.MovieList;
+import com.example.ApiProyectoFinal.persistence.model.User;
 import com.example.ApiProyectoFinal.persistence.repository.FilmRepositoryI;
 import com.example.ApiProyectoFinal.persistence.repository.MovieListRepositoryI;
 import com.example.ApiProyectoFinal.persistence.repository.UserRepositoryI;
@@ -24,6 +25,12 @@ public class MovieListServiceImpl implements MovieListServiceI {
 
     @Override
     public MovieListDTO createMovieList(MovieListDTO movieListDTO) {
+        if (movieListDTO.getUserId() == null) {
+            throw new IllegalArgumentException("User ID must not be null");
+        }
+
+        System.out.println("Creating list for user ID: " + movieListDTO.getUserId());
+
         MovieList movieList = convertToEntity(movieListDTO);
         movieList = movieListRepository.save(movieList);
         return convertToDTO(movieList);
@@ -59,8 +66,6 @@ public class MovieListServiceImpl implements MovieListServiceI {
         return convertToDTO(existingMovieList);
     }
 
-
-
     @Override
     public void deleteMovieList(Long listId) {
         movieListRepository.deleteById(listId);
@@ -85,10 +90,60 @@ public class MovieListServiceImpl implements MovieListServiceI {
         return movieLists.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public MovieListDTO addFilmToList(Long listId, Long filmId) {
+        MovieList movieList = movieListRepository.findById(listId)
+                .orElseThrow(() -> new RuntimeException("MovieList not found"));
+        Film film = filmRepository.findById(filmId)
+                .orElseThrow(() -> new RuntimeException("Film not found"));
+
+        if (!movieList.getFilms().contains(film)) {
+            movieList.getFilms().add(film);
+            movieList = movieListRepository.save(movieList);
+        }
+
+        return convertToDTO(movieList);
+    }
+
+    @Override
+    public MovieListDTO removeFilmFromList(Long listId, Long filmId) {
+        System.out.println("Attempting to remove film. List ID: " + listId + ", Film ID: " + filmId);
+
+        MovieList movieList = movieListRepository.findById(listId)
+                .orElseThrow(() -> {
+                    System.out.println("MovieList not found for ID: " + listId);
+                    return new RuntimeException("MovieList not found");
+                });
+        Film film = filmRepository.findById(filmId)
+                .orElseThrow(() -> {
+                    System.out.println("Film not found for ID: " + filmId);
+                    return new RuntimeException("Film not found");
+                });
+
+        if (movieList.getFilms().contains(film)) {
+            movieList.getFilms().remove(film);
+            movieList = movieListRepository.save(movieList);
+        } else {
+            System.out.println("Film not found in the list");
+        }
+
+        return convertToDTO(movieList);
+    }
+
+
+
+
+
+    @Override
+    public List<MovieListDTO> getMovieListsByUsername(String username) {
+        List<MovieList> movieLists = movieListRepository.findByUserUsername(username);
+        return movieLists.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
     private MovieListDTO convertToDTO(MovieList movieList) {
         return new MovieListDTO(movieList.getId(),
                 movieList.getUser().getUserId(),
-                movieList.getUser().getUsername(), // Obtener el nombre de usuario
+                movieList.getUser().getUsername(),
                 movieList.getName(),
                 movieList.getDescription(),
                 movieList.getCreatedAt(),
@@ -102,14 +157,14 @@ public class MovieListServiceImpl implements MovieListServiceI {
                         film.getPosterUrl())).collect(Collectors.toList()));
     }
 
-
     private MovieList convertToEntity(MovieListDTO movieListDTO) {
         MovieList movieList = new MovieList();
-        movieList.setId(movieListDTO.getListId());  // Asegurarse de asignar el ID
+        movieList.setId(movieListDTO.getListId());
         movieList.setName(movieListDTO.getName());
         movieList.setDescription(movieListDTO.getDescription());
-        movieList.setUser(userRepository.findById(movieListDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found")));
+        User user = userRepository.findById(movieListDTO.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("User ID must not be null"));
+        movieList.setUser(user);
         movieList.setFilms(movieListDTO.getFilms().stream()
                 .map(filmDTO -> filmRepository.findById(filmDTO.getFilmId())
                         .orElseThrow(() -> new RuntimeException("Film not found")))

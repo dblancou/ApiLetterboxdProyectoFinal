@@ -27,4 +27,5 @@ public interface UserServiceI {
 
     @Transactional(readOnly = true)
     boolean isFollowing(String username, Long userId);
+
 }

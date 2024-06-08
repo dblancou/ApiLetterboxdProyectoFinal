@@ -60,7 +60,10 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public UserDTO findUserByUsernameDTO(String username) {
-        User user = findUserByUsername(username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        System.out.println("User found: " + user.getUsername() + " with ID: " + user.getUserId());
 
         UserDTO userDto = new UserDTO();
         userDto.setUserId(user.getUserId());

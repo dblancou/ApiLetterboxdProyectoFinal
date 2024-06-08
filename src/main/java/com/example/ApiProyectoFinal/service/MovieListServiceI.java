@@ -11,4 +11,7 @@ public interface MovieListServiceI {
     MovieListDTO getMovieListById(Long listId);
     List<MovieListDTO> getAllMovieLists();
     List<MovieListDTO> getMovieListsByUser(Long userId);
+    List<MovieListDTO> getMovieListsByUsername(String username);
+    MovieListDTO addFilmToList(Long listId, Long filmId);
+    MovieListDTO removeFilmFromList(Long listId, Long filmId);
 }
