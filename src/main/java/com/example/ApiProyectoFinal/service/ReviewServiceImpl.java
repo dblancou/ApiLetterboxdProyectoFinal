@@ -87,9 +87,17 @@ public class ReviewServiceImpl implements ReviewServiceI {
     }
 
     private ReviewDTO convertToDTO(Review review) {
-        return new ReviewDTO(review.getReviewId(), review.getUser().getUserId(),
-                review.getFilm().getFilmId(), review.getContent(),
-                review.getRating(), review.getReviewDate());
+        ReviewDTO dto = new ReviewDTO();
+        dto.setReviewId(review.getReviewId());
+        dto.setUserId(review.getUser().getUserId());
+        dto.setUserName(review.getUser().getUsername()); // Añadido
+        dto.setFilmId(review.getFilm().getFilmId());
+        dto.setTitle(review.getFilm().getTitle()); // Añadido
+        dto.setPosterUrl(review.getFilm().getPosterUrl()); // Añadido
+        dto.setContent(review.getContent());
+        dto.setRating(review.getRating());
+        dto.setReviewDate(review.getReviewDate());
+        return dto;
     }
 
     private Review convertToEntity(ReviewDTO reviewDTO) {

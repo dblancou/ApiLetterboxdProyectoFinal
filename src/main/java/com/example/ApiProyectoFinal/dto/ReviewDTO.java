@@ -15,7 +15,10 @@ public class ReviewDTO implements Serializable {
 
     private Long reviewId;
     private Long userId;
+    private String userName; // Añadido
     private Long filmId;
+    private String title; // Añadido
+    private String posterUrl; // Añadido
     private String content;
     private Double rating;
     private LocalDateTime reviewDate;

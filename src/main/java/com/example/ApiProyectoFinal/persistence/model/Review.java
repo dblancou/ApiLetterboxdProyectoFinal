@@ -32,8 +32,8 @@ public class Review implements Serializable {
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;  // Referencia a la película reseñada
 
-    @NotBlank(message = "Review content cannot be empty")
-    @Size(min = 10, message = "Review must be at least 10 characters long")
+    //@NotBlank(message = "Review content cannot be empty")
+    //@Size(min = 10, message = "Review must be at least 10 characters long")
     @Column(name = "content", nullable = false)
     private String content;  // Contenido textual de la reseña
 
