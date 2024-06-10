@@ -1,4 +1,5 @@
 
+
 INSERT INTO genres (name)
 VALUES ('Acción'), ('Comedia'), ('Drama'), ('Fantasía'), ('Terror'), ('Misterio'), ('Romance'),
 ('Suspenso'), ('Ciencia ficción'), ('Western'), ('Documental'), ('Animación'), ('Biografía'),
@@ -7,9 +8,6 @@ VALUES ('Acción'), ('Comedia'), ('Drama'), ('Fantasía'), ('Terror'), ('Misteri
 
 INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
 ('Interestelar', 'Un equipo de exploradores viaja a través de un agujero de gusano en el espacio en un intento por asegurar la supervivencia de la humanidad.', '2014', 'Christopher Nolan', 8.6, 1, 'https://pics.filmaffinity.com/interstellar-366875261-large.jpg');
-
-INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
-('Origen', 'Un ladrón que roba secretos corporativos utilizando una tecnología de compartir sueños recibe la tarea inversa de plantar una idea en la mente de un CEO.', '2010', 'Christopher Nolan', 8.8, 1, 'https://pics.filmaffinity.com/inception-652954101-large.jpg');
 
 INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
 ('Cadena perpetua', 'Dos hombres encarcelados se vinculan a lo largo de varios años, encontrando consuelo y eventual redención a través de actos de decencia común.', '1994', 'Frank Darabont', 9.3, 2, 'https://pics.filmaffinity.com/the_shawshank_redemption-576140557-large.jpg');
@@ -62,9 +60,6 @@ INSERT INTO films (title, description, year, director, imdb_rating, genre_id, po
 INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
 ('John Wick', 'Un ex asesino a sueldo sale de su retiro para perseguir a los gánsteres que mataron a su perro y le quitaron todo.', '2014', 'Chad Stahelski', 7.4, 1,
 'https://pics.filmaffinity.com/john_wick-166872838-mmed.jpg');
-
-INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
-('Léon: El profesional', 'Mathilda, una niña de 12 años, es acogida a regañadientes por Léon, un asesino profesional, después de que su familia es asesinada. Una relación inusual se forma cuando ella se convierte en su protegida y aprende el oficio de asesino.', '1994', 'Luc Besson', 8.5, 1, 'https://pics.filmaffinity.com/leon_leon-207548886-mmed.jpg');
 
 INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
 ('Malditos bastardos', 'En la Francia ocupada por los nazis, un grupo de soldados judío-estadounidenses, conocidos como "Los Bastardos", son seleccionados específicamente para infundir miedo en el Tercer Reich mediante el escalpado y asesinato brutal de nazis.', '2009', 'Quentin Tarantino', 8.3, 1, 'https://pics.filmaffinity.com/inglourious_basterds-976286054-mmed.jpg');
@@ -142,9 +137,6 @@ INSERT INTO films (title, description, year, director, imdb_rating, genre_id, po
 ('Coco', 'El aspirante a músico Miguel, confrontado con la prohibición ancestral de su familia contra la música, entra en la Tierra de los Muertos para encontrar a su tatarabuelo, un legendario cantante.', '2017', 'Lee Unkrich, Adrian Molina', 8.0, 12, 'https://pics.filmaffinity.com/coco-155051069-mmed.jpg');
 
 INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
-('La princesa Mononoke', 'En un viaje para encontrar la cura para la maldición de un Tatarigami, Ashitaka se encuentra en medio de una guerra entre los dioses del bosque y Tatara, una colonia minera.', '1997', 'Hayao Miyazaki', 8.0, 12, 'https://pics.filmaffinity.com/mononoke_hime-598406013-mmed.jpg');
-
-INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
 ('El rey león', 'El príncipe león Simba y su padre son objetivos de su amargado tío, que desea ascender al trono.', '1994', 'Roger Allers, Rob Minkoff', 7.9, 12, 'https://pics.filmaffinity.com/the_lion_king-983881776-mmed.jpg');
 
 INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
@@ -186,8 +178,76 @@ INSERT INTO films (title, description, year, director, imdb_rating, genre_id, po
 INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
 ('Contagio', 'Profesionales de la salud, funcionarios del gobierno y personas comunes se encuentran en medio de una epidemia mundial mientras los CDC trabajan para encontrar una cura.', '2011', 'Steven Soderbergh', 6.7, 8, 'https://pics.filmaffinity.com/contagion-952852460-mmed.jpg');
 
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Harry Potter y la piedra filosofal', 'Un niño descubre en su undécimo cumpleaños que es el hijo huérfano de dos poderosos magos y que posee habilidades mágicas únicas propias.', '2001',
+'Chris Columbus', 7.6, 4, 'https://pics.filmaffinity.com/harry_potter_and_the_sorcerer_s_stone-154820574-large.jpg');
 
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('El laberinto del fauno', 'En la España franquista de 1944, la joven Ofelia se escapa a un misterioso y decadente mundo de fantasía.', '2006', 'Guillermo del Toro', 8.2, 4,
+'https://pics.filmaffinity.com/el_laberinto_del_fauno-222302534-large.jpg');
 
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Las crónicas de Narnia: El león, la bruja y el armario', 'Cuatro niños viajan a través de un armario mágico a la tierra de Narnia y aprenden sobre su destino de liberar al reino con la
+guía de un león místico.', '2005', 'Andrew Adamson', 6.9, 4,
+'https://pics.filmaffinity.com/the_chronicles_of_narnia_the_lion_the_witch_and_the_wardrobe-555349345-large.jpg');
 
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Stardust', 'Para ganar el corazón de su amada, un joven se embarca en un viaje para recuperar una estrella caída en el mágico reino de Stormhold.', '2007', 'Matthew Vaughn', 7.6, 4,
+'https://pics.filmaffinity.com/stardust-983044080-large.jpg');
 
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Willow', 'Un enano agricultor es elegido para proteger a un bebé especial de la reina malvada que teme que el niño sea su perdición.', '1988', 'Ron Howard', 7.3, 4,
+'https://pics.filmaffinity.com/willow-981190451-large.jpg');
 
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Inside Job', 'Documental que expone la corrupción sistémica de Estados Unidos por la industria de servicios financieros y las consecuencias de la crisis financiera de 2008.', '2010',
+'Charles Ferguson', 8.2, 11, 'https://pics.filmaffinity.com/inside_job-631822570-mmed.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('The Social Dilemma', 'Explora el peligroso impacto de las redes sociales en la sociedad, con testimonios de ex empleados de grandes empresas tecnológicas.', '2020', 'Jeff Orlowski',
+7.6, 11, 'https://pics.filmaffinity.com/the_social_dilemma-384147385-large.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('13th', 'Documental que analiza la historia de la desigualdad racial en los Estados Unidos, centrándose en las prisiones y el sistema de justicia.', '2016', 'Ava DuVernay', 8.2, 11,
+'https://pics.filmaffinity.com/13th-572149963-mmed.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Won\'t You Be My Neighbor?', 'Un documental sobre la vida y la carrera de Fred Rogers, el amado presentador de televisión infantil.', '2018', 'Morgan Neville', 8.4, 11,
+'https://pics.filmaffinity.com/won_t_you_be_my_neighbor-590428516-mmed.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Free Solo', 'Documenta la hazaña del escalador Alex Honnold al intentar escalar El Capitán sin cuerda.', '2018', 'Elizabeth Chai Vasarhelyi, Jimmy Chin', 8.2, 11,
+'https://pics.filmaffinity.com/free_solo-205471290-mmed.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Michael Clayton', 'Un "solucionador" de una firma legal de Nueva York debe lidiar con una crisis de su empresa y con su propia vida.', '2007', 'Tony Gilroy', 7.3, 8,
+'https://pics.filmaffinity.com/michael_clayton-686380723-large.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Sospechosos Habituales', 'Un agente de aduanas investiga a cinco criminales en un caso que se convierte en algo mucho más siniestro.', '1995', 'Bryan Singer', 8.5, 8,
+'https://pics.filmaffinity.com/the_usual_suspects-480334080-large.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('The Raid 2', 'Rama se infiltra en el sindicato criminal de Yakarta para proteger a su familia y desentrañar la corrupción en su departamento de policía.', '2014', 'Gareth Evans', 8.0,
+1, 'https://pics.filmaffinity.com/the_raid_2_berandal-549665158-mmed.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('La princesa Mononoke', 'En un viaje para encontrar la cura para la maldición de un Tatarigami, Ashitaka se encuentra en medio de una guerra entre los dioses del bosque y Tatara, una colonia minera.', '1997', 'Hayao Miyazaki', 8.0, 12, 'https://pics.filmaffinity.com/mononoke_hime-598406013-mmed.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Léon: El profesional', 'Mathilda, una niña de 12 años, es acogida a regañadientes por Léon, un asesino profesional, después de que su familia es asesinada. Una relación inusual se forma cuando ella se convierte en su protegida y aprende el oficio de asesino.', '1994', 'Luc Besson', 8.5, 1, 'https://pics.filmaffinity.com/leon_leon-207548886-mmed.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Tekkonkinkreet', 'Un par de huérfanos protegen su hogar de la Yakuza y de otros invasores con habilidades sobrenaturales.', '2006', 'Michael Arias', 7.6, 12,
+'https://pics.filmaffinity.com/tekon_kinkurito_tekkonkinkreet-575657635-large.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('La cabaña en el bosque', 'Cinco amigos se dirigen a una cabaña remota donde descubren que no están solos. Algo maligno está al acecho.', '2012', 'Drew Goddard', 7.0, 5,
+'https://pics.filmaffinity.com/the_cabin_in_the_woods-405481336-large.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Origen', 'Un ladrón que roba secretos corporativos utilizando una tecnología de compartir sueños recibe la tarea inversa de plantar una idea en la mente de un CEO.', '2010', 'Christopher Nolan', 8.8, 1, 'https://pics.filmaffinity.com/inception-652954101-large.jpg');
+
+INSERT INTO films (title, description, year, director, imdb_rating, genre_id, poster_url) VALUES
+('Godzilla Minus One', 'Japón se encuentra en ruinas tras la Segunda Guerra Mundial y enfrenta una nueva amenaza con el surgimiento de Godzilla.', '2023', 'Takashi Yamazaki', 8.0, 9,
+'https://pics.filmaffinity.com/gojira_1_0-527349454-large.jpg');
